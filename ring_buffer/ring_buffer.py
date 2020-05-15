@@ -20,7 +20,14 @@ class RingBuffer:
         self.size += 1
 
     def get(self):
-        temp = self.data.front
-        while temp is not self.data.front.link:
-            print(temp.link.get_value())
-            temp = temp.get_link()
+        cur = self.data.front
+
+        while cur:
+            print(cur.value)
+            cur = cur.link
+            if cur == self.data.front:
+                break
+        # temp = self.data.front
+        # while temp is not self.data.front.link:
+        #     print(temp.link.get_value())
+        #     temp = temp.get_link()
