@@ -17,34 +17,34 @@ class Queue:
 
     def enqueue(self, value):
         # enqueue an item at the rear (back) of list (furthest to the left)
-        new_node = Node()
-        new_node.value = value
-        if self.front == None:
-            self.front = new_node
-        else:
-            # old self.rear's link is new node
+        new_node = Node(value)
+
+        if self.rear is not None:
             self.rear.link = new_node
+        else:
+            self.front = new_node
 
         # replace previous rear with new node
         self.rear = new_node
         # make new rear's link the front to complete circle
-        self.rear.link = self.front
+        new_node.link = self.front
+
+        return self.rear.value
 
     def dequeue(self):
         # dequeue an item from front of list (furthest to the right)
-        if self.front == None:
-            return None
 
-        value = None
-        if self.front == self.rear:
-            value = self.front.value
-            self.front = None
-            self.rear = None
+        if self.front is not None:
+            deleted = self.front.value
+            self.front = self.front.link
 
         else:
-            node = self.front
-            value = node.value
-            self.front = self.front.link
-            self.rear.link = self.front
+            deleted = None
 
-        return value
+        return deleted
+
+    def display(self):
+        while self.rear != self.front:
+            print(self.front.value, end=", ")
+            self.front = self.front.link
+        print(self.front.value)

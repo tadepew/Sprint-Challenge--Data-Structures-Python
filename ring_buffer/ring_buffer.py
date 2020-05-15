@@ -20,14 +20,42 @@ class RingBuffer:
         self.size += 1
 
     def get(self):
-        cur = self.data.front
+        # attempt 1
+        # cur = self.data.front
 
-        while cur:
-            print(cur.value)
-            cur = cur.link
-            if cur == self.data.front:
-                break
+        # while self.data.front != self.data.rear:
+        #     print(cur.value, end=" ")
+        #     cur = cur.link
+        # print(self.data.rear.value)
+
+        # attempt 2
         # temp = self.data.front
         # while temp is not self.data.front.link:
         #     print(temp.link.get_value())
         #     temp = temp.get_link()
+
+        # if self.data:
+        #     self.data.display()
+
+        # return
+
+        # current_node = self.data.front
+        # values = []
+        # while self.data.front:
+        #     if self.data.front != self.data.rear:
+        #         values.append(current_node.value)
+        #     current_node = current_node.link
+        #     values.append(current_node.value)
+        #     return values
+
+        # Note:  This is the only [] allowed
+        values = []
+
+        # TODO: Your code here
+        current_item = self.data.front
+        while current_item is not self.data.rear:
+            values.append(current_item.value)
+            current_item = current_item.link
+        values.append(self.data.rear.value)
+        # print(list_buffer_contents)
+        return values
